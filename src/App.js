@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import Dashboard from "./components/dashboard";
+import LoginForm from "./components/loginForm";
+import RegistrationForm from "./components/registrationForm";
+import Post from "./components/post";
+import Users from "./components/users";
+import Stats from "./components/stats";
+import NavBar from "./components/navBar";
+import Logout from "./components/logout";
+import auth from "./services/authService";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    const user = auth.getCurrentUser();
+    this.setState({ user });
+    console.log(user);
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar user={this.state.user} />
+        <main className="container">
+          <Switch>
+            <Route path="/logout" component={Logout} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/register" component={RegistrationForm} />
+            <Route path="/post" component={Post} />
+            <Route path="/users" component={Users} />
+            <Route path="/stats" component={Stats} />
+            <Route path="/" exact component={Dashboard} />
+          </Switch>
+        </main>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
