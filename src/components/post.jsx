@@ -64,7 +64,7 @@ class Post extends Component {
               onChange={this.handleChange}
             ></textarea>
           </div>
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">Post</button>
         </form>
       </div>
     );
