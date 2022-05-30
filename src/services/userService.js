@@ -1,10 +1,10 @@
 import http from "./httpService";
 import config from "../config.json";
 
-const apiEndpoint = config.apiUrl + "/user/Register";
+const apiEndpoint = config.apiUrl + "/user";
 
 export function register(user) {
-  return http.post(apiEndpoint, {
+  return http.post(`${apiEndpoint}/Register`, {
     UserId: user.userid,
     Password: user.password,
     FirstName: user.firstname,
